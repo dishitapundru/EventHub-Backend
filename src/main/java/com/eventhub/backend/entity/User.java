@@ -1,3 +1,4 @@
+
 package com.eventhub.backend.entity;
 
 import jakarta.persistence.*;
@@ -25,6 +26,10 @@ public class User {
 
     @Column(nullable = false)
     private String status;
+
+    private String department;
+
+    private String year;
 
     private LocalDateTime createdAt;
 
@@ -90,6 +95,22 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public LocalDateTime getCreatedAt() {

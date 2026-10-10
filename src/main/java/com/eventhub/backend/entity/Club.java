@@ -1,3 +1,4 @@
+
 package com.eventhub.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,10 +19,22 @@ public class Club {
     private String category;
 
     @Column(nullable = false)
-    private int members;
+    private Integer members = 0;
 
     @Column(nullable = false)
     private String status;
+
+    @Column(columnDefinition = "TEXT")
+    private String about;
+
+    @Column(columnDefinition = "TEXT")
+    private String history;
+
+    @Column(columnDefinition = "TEXT")
+    private String pastEvents;
+
+    @Column(columnDefinition = "TEXT")
+    private String achievements;
 
     @OneToOne
     @JoinColumn(name = "owner_id", unique = true)
@@ -31,15 +44,10 @@ public class Club {
     public Club() {
     }
 
-    public Club(
-            String name,
-            String category,
-            int members,
-            String status
-    ) {
+    public Club(String name, String category, Integer members, String status) {
         this.name = name;
         this.category = category;
-        this.members = members;
+        this.members = members != null ? members : 0;
         this.status = status;
     }
 
@@ -67,12 +75,12 @@ public class Club {
         this.category = category;
     }
 
-    public int getMembers() {
+    public Integer getMembers() {
         return members;
     }
 
-    public void setMembers(int members) {
-        this.members = members;
+    public void setMembers(Integer members) {
+        this.members = members != null ? members : 0;
     }
 
     public String getStatus() {
@@ -81,6 +89,38 @@ public class Club {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
+    public String getPastEvents() {
+        return pastEvents;
+    }
+
+    public void setPastEvents(String pastEvents) {
+        this.pastEvents = pastEvents;
+    }
+
+    public String getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(String achievements) {
+        this.achievements = achievements;
     }
 
     public User getOwner() {

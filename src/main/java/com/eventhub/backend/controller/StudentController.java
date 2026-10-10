@@ -1,3 +1,4 @@
+
 package com.eventhub.backend.controller;
 
 import com.eventhub.backend.dto.StudentResponse;
@@ -50,10 +51,7 @@ public class StudentController {
                                 .body("User is not a student");
                     }
 
-                    // Delete notifications first
                     notificationRepository.deleteByUserId(id);
-
-                    // Then delete the student
                     userRepository.delete(user);
 
                     return ResponseEntity.ok()
@@ -69,7 +67,9 @@ public class StudentController {
                 user.getName(),
                 user.getEmail(),
                 user.getRole(),
-                user.getCreatedAt()
+                user.getCreatedAt(),
+                user.getDepartment(),
+                user.getYear()
         );
     }
 }

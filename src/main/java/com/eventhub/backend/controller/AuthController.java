@@ -1,3 +1,4 @@
+
 package com.eventhub.backend.controller;
 
 import com.eventhub.backend.dto.LoginResponse;
@@ -34,6 +35,7 @@ public class AuthController {
             @RequestBody RegisterRequest request
     ) {
 
+        // Check whether the email is already registered.
         if (userRepository.existsByEmail(request.getEmail())) {
             return ResponseEntity.badRequest()
                     .body("Email already registered");
@@ -47,6 +49,12 @@ public class AuthController {
                 passwordEncoder.encode(request.getPassword())
         );
         user.setRole(request.getRole());
+
+        // Save department and academic year for students.
+        if ("STUDENT".equalsIgnoreCase(request.getRole())) {
+            user.setDepartment(request.getDepartment());
+            user.setYear(request.getYear());
+        }
 
         // New club accounts must wait for admin approval.
         if ("CLUB".equalsIgnoreCase(request.getRole())) {
@@ -99,14 +107,14 @@ public class AuthController {
                     .body("Invalid email or password");
         }
 
-       return ResponseEntity.ok(
-        new LoginResponse(
-                user.getId(),
-                user.getName(),
-                user.getEmail(),
-                user.getRole(),
-                user.getStatus()
-        )
-);
+        return ResponseEntity.ok(
+                new LoginResponse(
+                        user.getId(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getRole(),
+                        user.getStatus()
+                )
+        );
     }
 }

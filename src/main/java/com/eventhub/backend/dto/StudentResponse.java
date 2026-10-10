@@ -10,22 +10,25 @@ public class StudentResponse {
     private String email;
     private String role;
     private LocalDateTime createdAt;
-
-    public StudentResponse() {
-    }
+    private String department;
+    private String year;
 
     public StudentResponse(
             Long id,
             String name,
             String email,
             String role,
-            LocalDateTime createdAt
+            LocalDateTime createdAt,
+            String department,
+            String year
     ) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.role = role;
         this.createdAt = createdAt;
+        this.department = department;
+        this.year = year;
     }
 
     public Long getId() {
@@ -46,5 +49,13 @@ public class StudentResponse {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getYear() {
+        return year;
     }
 }
